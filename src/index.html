@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>JavaScriptで順番に処理を実行する</title>
+<style type="text/css">
+  body, table, h1, h2, h3, h4, h5, h6 { font-size:12px; }
+  #material { margin-top:40px;}
+  #material ul { padding-left:20px; }
+  #material li { margin-left:10px; line-height:22px; font-size:12px;}
+</style>
+</head>
+<body>
+
+  <h1>JavaScriptで順番に処理を実行する</h1>
+  <p>※ 処理内容はログ( console.log() )に出力されています。</p>
+
+  <script src="./js/lib/jquery-1.7.2.min.js"></script>
+  <script src="./js/jobsequencer.js"></script>
+  <script>
+    var jobseq = new JobSequencer({interval: 1000});
+     
+    jobseq.push(function (o) {
+      console.log('1つ目の処理', o.id);  // 1
+    });
+     
+    jobseq.push(function (o) {
+      console.log('2つ目の処理', o.id);  // 2
+    }, 500);
+
+    jobseq.push(function (o) {
+      console.log('3つ目の処理', o.id);  // 3
+    }, 500);
+
+    jobseq.start();
+    // jobseq.stop();
+  </script>
+</body>
+</html>
